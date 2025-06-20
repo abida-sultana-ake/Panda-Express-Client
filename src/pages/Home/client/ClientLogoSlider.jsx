@@ -5,7 +5,7 @@ import { clientLogos } from "../../../data/clientLogos";
 const ClientLogoMarquee = () => {
   return (
     <section className="py-12 px-4 md:px-8 lg:px-16 bg-base-200">
-      <h2 className="text-3xl font-bold text-center mb-8">Trusted by Our Clients</h2>
+      <h2 className="text-3xl font-bold text-green-500 text-center mb-8">Trusted by Our Clients</h2>
       <Marquee
         pauseOnHover={true}
         speed={50}
