@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }} = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -24,13 +24,18 @@ const Login = () => {
             Password
           </label>
           <input type="password" {...register("password", {required: true, minLength:6})} className="input" placeholder="Password" />
+          {
+            errors.password?.type === 'required' && <p className="text-red-500">Password is required</p>
+          }
+          {
+            errors.password?.type === 'minLength' && <p className="text-red-500">Password must be 6 character or longer</p>
+          }
 
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-
-          <button className="btn btn-neutral mt-4">Login</button>
         </fieldset>
+        <button className="btn btn-neutral mt-4">Login</button>
       </form>
     </div>
   );
@@ -39,4 +44,4 @@ const Login = () => {
 export default Login;
 
 //test@gmail.com
-//test@123
+//Test@123
