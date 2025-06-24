@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
   const {
@@ -7,9 +8,21 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { createUser } = useAuth();
+
   const onSubmit = (data) => {
     console.log(data);
+    //console.log(createUser);
+    createUser(data.email, data.password)
+    .then( result => {
+      console.log(result.user);
+    })
+    .catch(error => {
+      console.log(error);
+    })
   };
+
   return (
     <div>
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -22,6 +35,7 @@ const Registration = () => {
               type="email"
               {...register("email", { required: true })}
               className="input"
+              name = "email"
               placeholder="Email"
             />
             {errors.email?.type === "required" && (
@@ -32,6 +46,7 @@ const Registration = () => {
             <label className="label">Password</label>
             <input
               type="password"
+              name = "password"
               {...register("password", { required: true, minLength: 6 })}
               className="input"
               placeholder="Password"
@@ -56,3 +71,6 @@ const Registration = () => {
 };
 
 export default Registration;
+
+//test@gmail.com
+//Test@123
