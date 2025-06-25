@@ -27,7 +27,7 @@ const Registration = () => {
     <div>
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <div className="card-body">
-          <h1 className="text-2xl font-bold">Create An Account!</h1>
+          <h1 className="text-2xl font-bold">Create An Account in PandaExpress!</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* email */}
             <label className="label">Email</label>
