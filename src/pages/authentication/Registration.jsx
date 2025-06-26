@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router";
+import SocialLogin from "./SocialLogin";
 
 const Registration = () => {
   const {
@@ -15,19 +17,21 @@ const Registration = () => {
     console.log(data);
     //console.log(createUser);
     createUser(data.email, data.password)
-    .then( result => {
-      console.log(result.user);
-    })
-    .catch(error => {
-      console.log(error);
-    })
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <div>
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <div className="card-body">
-          <h1 className="text-2xl font-bold">Create An Account in PandaExpress!</h1>
+          <h1 className="text-2xl font-bold">
+            Create Account in PandaExpress!
+          </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* email */}
             <label className="label">Email</label>
@@ -35,7 +39,7 @@ const Registration = () => {
               type="email"
               {...register("email", { required: true })}
               className="input"
-              name = "email"
+              name="email"
               placeholder="Email"
             />
             {errors.email?.type === "required" && (
@@ -46,7 +50,7 @@ const Registration = () => {
             <label className="label">Password</label>
             <input
               type="password"
-              name = "password"
+              name="password"
               {...register("password", { required: true, minLength: 6 })}
               className="input"
               placeholder="Password"
@@ -62,8 +66,17 @@ const Registration = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            <button className="btn btn-neutral mt-4">Register</button>
+            <button className="btn  bg-green-300 mt-4">Register</button>
+            <p>
+              <small>
+                Already have an account?{" "}
+                <Link to="/login" className="btn btn-link">
+                  Login
+                </Link>
+              </small>
+            </p>
           </form>
+          <SocialLogin />
         </div>
       </div>
     </div>
