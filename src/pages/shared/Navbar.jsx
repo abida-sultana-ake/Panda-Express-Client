@@ -1,6 +1,6 @@
 import React from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import PandaExpressLogo from "../pandaExpressLogo/PandaExpressLogo";
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1"> {navItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <Link to="/login" className="btn btn-primary">Login</Link>
         </div>
       </div>
     </div>
