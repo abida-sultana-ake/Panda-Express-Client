@@ -4,11 +4,13 @@ import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SendParcel = () => {
   const warehouseData = useLoaderData();
-  const { user } = useAuth(); // Get logged-in user
+  const { user } = useAuth();
   const regions = [...new Set(warehouseData.map((w) => w.region))];
+
   const [selectedSenderRegion, setSelectedSenderRegion] = useState("");
   const [selectedReceiverRegion, setSelectedReceiverRegion] = useState("");
 
@@ -37,7 +39,7 @@ const SendParcel = () => {
       price: total,
     };
 
-    // TODO: Save parcelData to database here
+    // TODO: Save to your backend here (e.g., POST request)
 
     Swal.fire({
       icon: "success",
@@ -47,6 +49,7 @@ const SendParcel = () => {
       showConfirmButton: false,
     });
 
+    toast.success("📦 Parcel added successfully!");
     reset();
     setSelectedSenderRegion("");
     setSelectedReceiverRegion("");
@@ -83,16 +86,8 @@ const SendParcel = () => {
         <p><strong>Pickup Time:</strong> ${new Date(data.pickupDateTime).toLocaleString()}</p>
         <hr/>
         <p><strong>Base Charge:</strong> ৳${base}</p>
-        ${
-          extraCharge
-            ? `<p><strong>Extra Weight (${extraWeight}kg x ৳40):</strong> ৳${extraCharge}</p>`
-            : ""
-        }
-        ${
-          outsideCharge
-            ? `<p><strong>Outside District Fee:</strong> ৳${outsideCharge}</p>`
-            : ""
-        }
+        ${extraCharge ? `<p><strong>Extra Weight (${extraWeight}kg x ৳40):</strong> ৳${extraCharge}</p>` : ""}
+        ${outsideCharge ? `<p><strong>Outside District Fee:</strong> ৳${outsideCharge}</p>` : ""}
         <hr/>
         <h2><strong>Total Cost: <span style="color:#10b981;">৳${total}</span></strong></h2>
       </div>
@@ -118,9 +113,7 @@ const SendParcel = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 bg-base-200 rounded-xl shadow-lg">
       <h2 className="text-3xl font-bold mb-2 text-center">Add Parcel</h2>
-      <p className="text-center mb-6 text-gray-500">
-        Fill out the details to send a parcel
-      </p>
+      <p className="text-center mb-6 text-gray-500">Fill out the details to send a parcel</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Parcel Info */}
