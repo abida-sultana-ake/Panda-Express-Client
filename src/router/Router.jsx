@@ -5,6 +5,8 @@ import AuthLayout from "../layout/AuthLayout";
 import Login from "../pages/authentication/Login";
 import Registration from "../pages/authentication/Registration";
 import covarage from "../pages/coverage/covarage";
+import PrivateRoute from "../routes/PrivateRoute";
+import SendParcel from "../pages/sendParcel/SendParcel";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         path: "/covarage",
         Component: covarage,
+      },
+      {
+        path: "/sendParcel",
+        element: (
+          <PrivateRoute>
+            <SendParcel />
+          </PrivateRoute>
+        ),
       },
     ],
   },
