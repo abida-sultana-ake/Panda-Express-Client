@@ -118,7 +118,7 @@ const SendParcel = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Parcel Info */}
         <div className="border p-4 rounded-md">
-          <h3 className="text-xl font-semibold mb-4">Parcel Info</h3>
+          <h3 className="text-xl font-semibold mb-4">Parcel Information</h3>
 
           <div className="form-control">
             <label className="label">Type</label>
