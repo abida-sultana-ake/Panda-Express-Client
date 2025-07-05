@@ -39,6 +39,9 @@ const SendParcel = () => {
       price: total,
     };
 
+    // ✅ Log the final parcel data
+    console.log("📦 Final Parcel Data to Save:", parcelData);
+
     // TODO: Save to your backend here (e.g., POST request)
 
     Swal.fire({
@@ -56,6 +59,8 @@ const SendParcel = () => {
   };
 
   const onSubmit = async (data) => {
+    console.log("📝 Submitted Form Data:", data); // ✅ Log form submission
+
     const { type, weight, senderServiceCenter, receiverServiceCenter } = data;
     const w = parseFloat(weight) || 0;
     const withinCity = senderServiceCenter === receiverServiceCenter;
@@ -82,12 +87,26 @@ const SendParcel = () => {
     const breakdownHtml = `
       <div style="text-align: left;">
         <p><strong>Parcel Type:</strong> ${typeLabel}</p>
-        ${type === "non-document" ? `<p><strong>Weight:</strong> ${w} kg</p>` : ""}
-        <p><strong>Pickup Time:</strong> ${new Date(data.pickupDateTime).toLocaleString()}</p>
+        ${
+          type === "non-document"
+            ? `<p><strong>Weight:</strong> ${w} kg</p>`
+            : ""
+        }
+        <p><strong>Pickup Time:</strong> ${new Date(
+          data.pickupDateTime
+        ).toLocaleString()}</p>
         <hr/>
         <p><strong>Base Charge:</strong> ৳${base}</p>
-        ${extraCharge ? `<p><strong>Extra Weight (${extraWeight}kg x ৳40):</strong> ৳${extraCharge}</p>` : ""}
-        ${outsideCharge ? `<p><strong>Outside District Fee:</strong> ৳${outsideCharge}</p>` : ""}
+        ${
+          extraCharge
+            ? `<p><strong>Extra Weight (${extraWeight}kg x ৳40):</strong> ৳${extraCharge}</p>`
+            : ""
+        }
+        ${
+          outsideCharge
+            ? `<p><strong>Outside District Fee:</strong> ৳${outsideCharge}</p>`
+            : ""
+        }
         <hr/>
         <h2><strong>Total Cost: <span style="color:#10b981;">৳${total}</span></strong></h2>
       </div>
@@ -113,7 +132,9 @@ const SendParcel = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 bg-base-200 rounded-xl shadow-lg">
       <h2 className="text-3xl font-bold mb-2 text-center">Add Parcel</h2>
-      <p className="text-center mb-6 text-gray-500">Fill out the details to send a parcel</p>
+      <p className="text-center mb-6 text-gray-500">
+        Fill out the details to send a parcel
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Parcel Info */}
@@ -142,7 +163,9 @@ const SendParcel = () => {
                 <span className="label-text ml-2">Non-Document</span>
               </label>
             </div>
-            {errors.type && <p className="text-error text-sm">Type is required</p>}
+            {errors.type && (
+              <p className="text-error text-sm">Type is required</p>
+            )}
           </div>
 
           <div className="form-control mt-4">
@@ -152,7 +175,9 @@ const SendParcel = () => {
               {...register("title", { required: true })}
               className="input input-bordered"
             />
-            {errors.title && <p className="text-error text-sm">Title is required</p>}
+            {errors.title && (
+              <p className="text-error text-sm">Title is required</p>
+            )}
           </div>
 
           {parcelType === "non-document" && (
